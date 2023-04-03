@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    field.cattle.io/publicEndpoints: '[{"addresses":[""],"port":80,"protocol":"HTTP","serviceName":"devops:sso-keycloak-service","ingressName":"devops:sso-keycloak-ingress","hostname":"keycloack.prod.psd.pernambucanas.com.br","allNodes":false}]'
+  name: sso-keycloak-ingress
+  namespace: devops
+spec:
+  rules:
+  - host: keycloack.prod.psd.pernambucanas.com.br
+    http:
+      paths:
+      - backend:
+          service:
+            name: sso-keycloak-service
+            port:
+              number: 80
+        pathType: ImplementationSpecific

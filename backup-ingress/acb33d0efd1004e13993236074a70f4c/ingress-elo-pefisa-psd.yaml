@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    field.cattle.io/publicEndpoints: '[{"addresses":[""],"port":443,"protocol":"HTTPS","serviceName":"default:elo-qr-code-services-master-svc","ingressName":"default:elo-pefisa","hostname":"elo-pefisa.psd.pernambucanas.com.br","path":"/api/eloqrcode/v1/payments/(.+)/callback","allNodes":false}]'
+    kubernetes.io/change-cause: kubectl apply --filename=k8s/production/ingress.yaml
+      --namespace=default --record=true
+    kubernetes.io/ingress.class: nginx-mtls-elo
+    nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "true"
+    nginx.ingress.kubernetes.io/auth-tls-secret: nginx-mtls-elo/my-cert-authority
+    nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+  labels:
+    app: elo-qr-code-services-master
+  name: elo-pefisa
+  namespace: default
+spec:
+  rules:
+  - host: elo-pefisa.psd.pernambucanas.com.br
+    http:
+      paths:
+      - backend:
+          service:
+            name: elo-qr-code-services-master-svc
+            port:
+              number: 80
+        path: /api/eloqrcode/v1/payments/(.+)/callback
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - elo-pefisa.psd.pernambucanas.com.br
+    secretName: cert-wildcard-prd

@@ -1,0 +1,75 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx-onidata
+    nginx.ingress.kubernetes.io/server-snippet: |
+      add_header Last-Modified $date_gmt;
+      add_header Cache-Control 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+      if_modified_since off;
+      expires off;
+      etag off;
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/whitelist-source-range: 54.94.79.8/32,18.228.163.186/32,177.71.168.57/32
+  name: ingress-onidata
+  namespace: default
+spec:
+  rules:
+  - host: onidata.pefisa.com.br
+    http:
+      paths:
+      - backend:
+          service:
+            name: api-emprestimo-pessoal-master-svc
+            port:
+              number: 80
+        path: /api/v1/emprestimo-pessoal/limites
+        pathType: Prefix
+      - backend:
+          service:
+            name: api-emprestimo-pessoal-master-svc
+            port:
+              number: 80
+        path: /api/v1/emprestimo-pessoal/registros/boletos
+        pathType: Prefix
+      - backend:
+          service:
+            name: api-emprestimo-pessoal-master-svc
+            port:
+              number: 80
+        path: /api/v1/emprestimo-pessoal/lancamentos/credito
+        pathType: Prefix
+      - backend:
+          service:
+            name: api-emprestimo-pessoal-master-svc
+            port:
+              number: 80
+        path: /api/v1/emprestimo-pessoal/lancamentos/debito
+        pathType: Prefix
+      - backend:
+          service:
+            name: security-gateway-master-svc
+            port:
+              number: 80
+        path: /api/gateway/v2/partner/oauth/token
+        pathType: Prefix
+      - backend:
+          service:
+            name: security-gateway-master-svc
+            port:
+              number: 80
+        path: /api/gateway/v1
+        pathType: Prefix
+      - backend:
+          service:
+            name: kong-1609819779-kong-proxy
+            port:
+              number: 80
+        path: /api/v1/fgts
+        pathType: Prefix
+  tls:
+  - hosts:
+    - onidata.pefisa.com.br
+    secretName: pefisa-credential
