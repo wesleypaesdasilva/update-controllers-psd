@@ -15,7 +15,7 @@ metadata:
     app.kubernetes.io/instance: controller-partner-proxy
     app.kubernetes.io/name: controller-partner-proxy
     app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.4.0
+    app.kubernetes.io/version: 1.3.1
   name: controller-partner-proxy
   namespace: nginx-controller-partner-proxy
 ---
@@ -27,7 +27,7 @@ metadata:
     app.kubernetes.io/instance: controller-partner-proxy
     app.kubernetes.io/name: controller-partner-proxy
     app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.4.0
+    app.kubernetes.io/version: 1.3.1
   name: controller-partner-proxy-admission
   namespace: nginx-controller-partner-proxy
 ---
@@ -39,7 +39,7 @@ metadata:
     app.kubernetes.io/instance: controller-partner-proxy
     app.kubernetes.io/name: controller-partner-proxy
     app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.4.0
+    app.kubernetes.io/version: 1.3.1
   name: controller-partner-proxy
   namespace: nginx-controller-partner-proxy
 rules:
@@ -127,14 +127,6 @@ rules:
   verbs:
   - create
   - patch
-- apiGroups:
-  - discovery.k8s.io
-  resources:
-  - endpointslices
-  verbs:
-  - list
-  - watch
-  - get
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -144,7 +136,7 @@ metadata:
     app.kubernetes.io/instance: controller-partner-proxy
     app.kubernetes.io/name: controller-partner-proxy
     app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.4.0
+    app.kubernetes.io/version: 1.3.1
   name: controller-partner-proxy-admission
   namespace: nginx-controller-partner-proxy
 rules:
@@ -163,7 +155,7 @@ metadata:
     app.kubernetes.io/instance: controller-partner-proxy
     app.kubernetes.io/name: controller-partner-proxy
     app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.4.0
+    app.kubernetes.io/version: 1.3.1
   name: controller-partner-proxy
 rules:
 - apiGroups:
@@ -228,14 +220,6 @@ rules:
   - get
   - list
   - watch
-- apiGroups:
-  - discovery.k8s.io
-  resources:
-  - endpointslices
-  verbs:
-  - list
-  - watch
-  - get
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -245,7 +229,7 @@ metadata:
     app.kubernetes.io/instance: controller-partner-proxy
     app.kubernetes.io/name: controller-partner-proxy
     app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.4.0
+    app.kubernetes.io/version: 1.3.1
   name: controller-partner-proxy-admission
 rules:
 - apiGroups:
@@ -264,7 +248,7 @@ metadata:
     app.kubernetes.io/instance: controller-partner-proxy
     app.kubernetes.io/name: controller-partner-proxy
     app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.4.0
+    app.kubernetes.io/version: 1.3.1
   name: controller-partner-proxy
   namespace: nginx-controller-partner-proxy
 roleRef:
@@ -284,7 +268,7 @@ metadata:
     app.kubernetes.io/instance: controller-partner-proxy
     app.kubernetes.io/name: controller-partner-proxy
     app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.4.0
+    app.kubernetes.io/version: 1.3.1
   name: controller-partner-proxy-admission
   namespace: nginx-controller-partner-proxy
 roleRef:
@@ -303,7 +287,7 @@ metadata:
     app.kubernetes.io/instance: controller-partner-proxy
     app.kubernetes.io/name: controller-partner-proxy
     app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.4.0
+    app.kubernetes.io/version: 1.3.1
   name: controller-partner-proxy
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -322,7 +306,7 @@ metadata:
     app.kubernetes.io/instance: controller-partner-proxy
     app.kubernetes.io/name: controller-partner-proxy
     app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.4.0
+    app.kubernetes.io/version: 1.3.1
   name: controller-partner-proxy-admission
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -345,7 +329,7 @@ metadata:
     app.kubernetes.io/instance: controller-partner-proxy
     app.kubernetes.io/name: controller-partner-proxy
     app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.4.0
+    app.kubernetes.io/version: 1.3.1
   name: controller-partner-proxy-controller
   namespace: nginx-controller-partner-proxy
 ---
@@ -361,7 +345,7 @@ metadata:
     app.kubernetes.io/instance: controller-partner-proxy
     app.kubernetes.io/name: controller-partner-proxy
     app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.4.0
+    app.kubernetes.io/version: 1.3.1
   name: controller-partner-proxy-controller
   namespace: nginx-controller-partner-proxy
 spec:
@@ -394,7 +378,7 @@ metadata:
     app.kubernetes.io/instance: controller-partner-proxy
     app.kubernetes.io/name: controller-partner-proxy
     app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.4.0
+    app.kubernetes.io/version: 1.3.1
   name: controller-partner-proxy-controller-admission
   namespace: nginx-controller-partner-proxy
 spec:
@@ -417,7 +401,7 @@ metadata:
     app.kubernetes.io/instance: controller-partner-proxy
     app.kubernetes.io/name: controller-partner-proxy
     app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.4.0
+    app.kubernetes.io/version: 1.3.1
   name: controller-partner-proxy-controller
   namespace: nginx-controller-partner-proxy
 spec:
@@ -440,7 +424,7 @@ spec:
         - /nginx-ingress-controller
         - --publish-service=$(POD_NAMESPACE)/controller-partner-proxy-controller
         - --election-id=ingress-controller-leader
-        - --controller-class=k8s.io/ingress-nginx-partner-proxy
+        - --controller-class=k8s.io/controller-partner-proxy
         - --ingress-class=controller-partner-proxy
         - --configmap=$(POD_NAMESPACE)/controller-partner-proxy-controller
         - --validating-webhook=:8443
@@ -457,7 +441,7 @@ spec:
               fieldPath: metadata.namespace
         - name: LD_PRELOAD
           value: /usr/local/lib/libmimalloc.so
-        image: registry.k8s.io/ingress-nginx/controller:v1.4.0@sha256:34ee929b111ffc7aa426ffd409af44da48e5a0eea1eb2207994d9e0c0882d143
+        image: registry.k8s.io/ingress-nginx/controller:v1.3.1@sha256:54f7fe2c6c5a9db9a0ebf1131797109bb7a4d91f56b9b362bde2abd237dd1974
         imagePullPolicy: IfNotPresent
         lifecycle:
           preStop:
@@ -529,7 +513,7 @@ metadata:
     app.kubernetes.io/instance: controller-partner-proxy
     app.kubernetes.io/name: controller-partner-proxy
     app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.4.0
+    app.kubernetes.io/version: 1.3.1
   name: controller-partner-proxy-admission-create
   namespace: nginx-controller-partner-proxy
 spec:
@@ -540,7 +524,7 @@ spec:
         app.kubernetes.io/instance: controller-partner-proxy
         app.kubernetes.io/name: controller-partner-proxy
         app.kubernetes.io/part-of: ingress-nginx
-        app.kubernetes.io/version: 1.4.0
+        app.kubernetes.io/version: 1.3.1
       name: controller-partner-proxy-admission-create
     spec:
       containers:
@@ -554,7 +538,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-        image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20220916-gd32f8c343@sha256:39c5b2e3310dc4264d638ad28d9d1d96c4cbb2b2dcfb52368fe4e3c63f61e10f
+        image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.3.0@sha256:549e71a6ca248c5abd51cdb73dbc3083df62cf92ed5e6147c780e30f7e007a47
         imagePullPolicy: IfNotPresent
         name: create
         securityContext:
@@ -576,7 +560,7 @@ metadata:
     app.kubernetes.io/instance: controller-partner-proxy
     app.kubernetes.io/name: controller-partner-proxy
     app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.4.0
+    app.kubernetes.io/version: 1.3.1
   name: controller-partner-proxy-admission-patch
   namespace: nginx-controller-partner-proxy
 spec:
@@ -587,7 +571,7 @@ spec:
         app.kubernetes.io/instance: controller-partner-proxy
         app.kubernetes.io/name: controller-partner-proxy
         app.kubernetes.io/part-of: ingress-nginx
-        app.kubernetes.io/version: 1.4.0
+        app.kubernetes.io/version: 1.3.1
       name: controller-partner-proxy-admission-patch
     spec:
       containers:
@@ -603,7 +587,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-        image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20220916-gd32f8c343@sha256:39c5b2e3310dc4264d638ad28d9d1d96c4cbb2b2dcfb52368fe4e3c63f61e10f
+        image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.3.0@sha256:549e71a6ca248c5abd51cdb73dbc3083df62cf92ed5e6147c780e30f7e007a47
         imagePullPolicy: IfNotPresent
         name: patch
         securityContext:
@@ -625,10 +609,10 @@ metadata:
     app.kubernetes.io/instance: controller-partner-proxy
     app.kubernetes.io/name: controller-partner-proxy
     app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.4.0
+    app.kubernetes.io/version: 1.3.1
   name: controller-partner-proxy
 spec:
-  controller: k8s.io/ingress-nginx-partner-proxy
+  controller: k8s.io/controller-partner-proxy
 ---
 apiVersion: admissionregistration.k8s.io/v1
 kind: ValidatingWebhookConfiguration
@@ -638,7 +622,7 @@ metadata:
     app.kubernetes.io/instance: controller-partner-proxy
     app.kubernetes.io/name: controller-partner-proxy
     app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.4.0
+    app.kubernetes.io/version: 1.3.1
   name: controller-partner-proxy-admission
 webhooks:
 - admissionReviewVersions:
