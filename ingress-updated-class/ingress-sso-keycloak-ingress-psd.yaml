@@ -3,7 +3,8 @@ kind: Ingress
 metadata:
   annotations:
     field.cattle.io/publicEndpoints: '[{"addresses":[""],"port":80,"protocol":"HTTP","serviceName":"devops:sso-keycloak-service","ingressName":"devops:sso-keycloak-ingress","hostname":"keycloack.prod.psd.pernambucanas.com.br","allNodes":false}]'
-  name: sso-keycloak-ingress
+    kubernetes.io/ingress.class: controller-default
+  name: sso-keycloak-ingress-1.4
   namespace: devops
 spec:
   rules:

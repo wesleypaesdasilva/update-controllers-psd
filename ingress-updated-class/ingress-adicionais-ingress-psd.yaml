@@ -3,8 +3,8 @@ kind: Ingress
 metadata:
   annotations:
     field.cattle.io/publicEndpoints: '[{"addresses":[""],"port":80,"protocol":"HTTP","serviceName":"default:adicionais-master-svc","ingressName":"default:adicionais-ingress","hostname":"adicionais.psd.pernambucanas.com.br","allNodes":false}]'
-    kubernetes.io/ingress.class: nginx
-  name: adicionais-ingress
+    kubernetes.io/ingress.class: controller-default
+  name: adicionais-ingress-1.4
   namespace: default
 spec:
   rules:
